@@ -1,40 +1,31 @@
-# Use an official PHP runtime as a parent image
-FROM php:8.0-fpm
+# Use the official PHP 8.0 image
+FROM php:8.3.11
 
-# Set the working directory inside the container
-WORKDIR /var/www
-
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    libpng-dev \
-    libjpeg62-turbo-dev \
-    libfreetype6-dev \
-    libonig-dev \
-    libxml2-dev \
+# Install system dependencies and required libraries
+RUN apt-get update -y && apt-get install -y \
+    openssl \
     zip \
     unzip \
     git \
-    curl
+    libonig-dev # Install oniguruma library for mbstring
 
 # Install PHP extensions
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+RUN docker-php-ext-install pdo mbstring
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Copy existing application directory contents to the working directory inside the container
-COPY . /var/www
+# Set the working directory
+WORKDIR /app
 
-# Give permission for Laravel directory
-RUN chown -R www-data:www-data /var/www
+# Copy the project files into the container
+COPY . /app
 
-# Install PHP dependencies via Composer
-RUN composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev
+# Install project dependencies using Composer
+RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
-# Copy the existing application directory contents to the working directory
+# Run Laravel's built-in server
+CMD php artisan serve --host=0.0.0.0 --port=8181
 
-# Expose port 9000 and start PHP-FPM server
-EXPOSE 9000
-
-CMD ["php-fpm"]
+# Expose port 8181
+EXPOSE 8181
