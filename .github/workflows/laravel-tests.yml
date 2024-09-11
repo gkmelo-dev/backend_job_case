@@ -29,8 +29,6 @@ jobs:
           --health-retries=3
         volumes:
           - mysql-data:/var/lib/mysql
-        # This makes sure the service is ready before running the tests
-        timeout: 600s
 
     steps:
       - name: Check out the repository
