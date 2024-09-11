@@ -186,6 +186,10 @@ class ProjectController extends Controller
             return response()->json(['message' => 'Project not found'], 404);
         }
 
+        $project->location = $data['installation_location'];
+        $project->installationType = $data['installation_type'];
+        $project->equipments = $data['equipments'];
+
         $updatedProject = $this->projectRepository->update($project);
 
         return response()->json([
