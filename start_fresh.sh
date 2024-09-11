@@ -8,7 +8,10 @@ cp .env.example .env
 # docker compose exec app composer install
 # docker compose exec app artisan key:generate
 # docker compose exec app php artisan route:clear
-docker compose exec app php artisan route:list
+# docker compose exec app php artisan route:list
+# docker compose exec app php artisan make:migration create_clients_table
+docker compose exec app php artisan migrate
+
 # php artisan migrate
 
 # update .env
