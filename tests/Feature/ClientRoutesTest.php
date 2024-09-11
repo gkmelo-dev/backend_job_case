@@ -40,9 +40,11 @@ class ClientRoutesTest extends TestCase
         $response = $this->getJson('/api/clients');
 
         $response->assertStatus(200)
-                 ->assertJsonStructure([[
-                     'id', 'name', 'email', 'phone', 'cpfCnpj'
-                 ]]);
+            ->assertJsonStructure([
+                'clients' => [
+                    '*' => ['id', 'name', 'email', 'phone', 'cpfCnpj']
+                ]
+            ]);
     }
 
     public function test_can_update_client()
