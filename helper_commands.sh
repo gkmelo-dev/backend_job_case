@@ -12,6 +12,8 @@ cp .env.example .env
 # docker compose exec app php artisan make:migration create_clients_table
 # docker compose exec app php artisan migrate
 
+docker compose exec app composer require darkaonline/l5-swagger
+docker compose exec app php artisan vendor:publish --provider "L5Swagger\L5SwaggerServiceProvider"
 
 # TESTS
 docker compose exec app php artisan make:test CreateClientUseCaseTest --unit
@@ -29,6 +31,9 @@ docker compose exec app php artisan cache:clear
 docker compose exec app php artisan route:clear
 
 docker compose exec app composer dump-autoload
+
+# Generate Swagger
+docker compose exec app php artisan l5-swagger:generate
 
 # update .env
 # APP_NAME="77sol backend"

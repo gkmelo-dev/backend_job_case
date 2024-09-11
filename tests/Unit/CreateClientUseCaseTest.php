@@ -34,3 +34,5 @@ class CreateClientUseCaseTest extends TestCase
         $this->assertEquals('john@example.com', $client->email);
     }
 }
+
+// TODO add delete unit test
