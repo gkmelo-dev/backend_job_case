@@ -1,5 +1,8 @@
 # 77sol backend case
 
+## Test
+Update env
+L5_SWAGGER_CONST_HOST
 
 ## Links
 https://github.com/namtrt/laravel-10-clean-architecture

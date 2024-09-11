@@ -140,7 +140,7 @@ class ClientController extends Controller
      *         required=true,
      *         @OA\JsonContent(
      *             required={"name", "email", "phone", "cpfCnpj"},
-     *             @OA\Property(property="name", type="string", example="John Doe"),
+     *             @OA\Property(property="name", type="string", example="Jane Doe"),
      *             @OA\Property(property="email", type="string", example="john@example.com"),
      *             @OA\Property(property="phone", type="string", example="1234567890"),
      *             @OA\Property(property="cpfCnpj", type="string", example="12345678909")

@@ -10,7 +10,7 @@
     },
     "servers": [
         {
-            "url": "http://my-default-host.com",
+            "url": "http://192.168.1.102:8989",
             "description": "Servidor principal"
         }
     ],
@@ -201,7 +201,7 @@
                                 "properties": {
                                     "name": {
                                         "type": "string",
-                                        "example": "John Doe"
+                                        "example": "Jane Doe"
                                     },
                                     "email": {
                                         "type": "string",
