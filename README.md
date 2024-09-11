@@ -4,6 +4,8 @@
 install docker and docker compose https://docs.docker.com/engine/install/<br>
 A depender da sua instalação do docker o comando "docker compose" é o correto, se não funcionar, tente "docker-compose"
 
+PS: Rode os comandos "docker compose" e "docker-compose" dentro da pasta do projeto
+
 ## Run
 ```bash
 docker compose up -d
