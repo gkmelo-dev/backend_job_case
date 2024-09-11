@@ -72,35 +72,60 @@ class ProjectController extends Controller
         ], 201);
     }
 
-    /**
+        /**
      * @OA\Get(
      *     path="/api/projects",
-     *     summary="List all projects",
+     *     summary="List all projects with optional filters",
      *     tags={"Projects"},
+     *     @OA\Parameter(
+     *         name="client_id",
+     *         in="query",
+     *         description="Filter by client ID",
+     *         required=false,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Parameter(
+     *         name="installation_location",
+     *         in="query",
+     *         description="Filter by installation location (UF)",
+     *         required=false,
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="installation_type",
+     *         in="query",
+     *         description="Filter by installation type",
+     *         required=false,
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="equipments",
+     *         in="query",
+     *         description="Filter by equipment",
+     *         required=false,
+     *         @OA\Schema(type="string")
+     *     ),
      *     @OA\Response(
      *         response=200,
      *         description="List of projects",
      *         @OA\JsonContent(
-     *             @OA\Property(property="projects", type="array", 
-     *                 @OA\Items(type="object",
-     *                     @OA\Property(property="client_id", type="integer", example=1),
-     *                     @OA\Property(property="installation_location", type="string", example="SP"),
-     *                     @OA\Property(property="installation_type", type="string", example="Laje"),
-     *                     @OA\Property(property="equipments", type="array", 
-     *                         @OA\Items(
-     *                             @OA\Property(property="name", type="string", example="Módulo"),
-     *                             @OA\Property(property="quantity", type="integer", example=10)
-     *                         )
-     *                     )
-     *                 )
-     *             )
+     *             @OA\Property(property="projects", type="array", @OA\Items(type="object"))
      *         )
      *     )
      * )
      */
-    public function index()
+    public function index(Request $request)
     {
-        $projects = $this->projectRepository->findAll();
+        // Filtros opcionais
+        $filters = [
+            'client_id' => $request->input('client_id'),
+            'installation_location' => $request->input('installation_location'),
+            'installation_type' => $request->input('installation_type'),
+        ];
+
+        // Filtrar apenas pelos campos que estão presentes
+        $projects = $this->projectRepository->findWithFilters(array_filter($filters), $request->input('equipments'));
+
         return response()->json(['projects' => $projects], 200);
     }
 

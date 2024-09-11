@@ -78,6 +78,35 @@ class EloquentProjectRepository implements ProjectRepositoryInterface
         })->toArray();
     }
 
+    public function findWithFilters(array $filters, $equipment = null): array
+    {
+        $query = EloquentProject::query();
+
+        // Aplica os filtros fornecidos
+        foreach ($filters as $key => $value) {
+            $query->where($key, $value);
+        }
+
+        // Se houver um equipamento fornecido, adiciona uma condição de busca nos equipamentos
+        if ($equipment) {
+            $query->where('equipments', 'like', '%' . $equipment . '%');
+        }
+
+        $eloquentProjects = $query->get();
+
+        return $eloquentProjects->map(function ($project) {
+            $equipments = json_decode($project->equipments, true);
+
+            return new Project(
+                $project->id,
+                $project->client_id,
+                $project->installation_location,
+                $project->installation_type,
+                $equipments
+            );
+        })->toArray();
+    }
+
     public function delete($id): bool
     {
         return EloquentProject::destroy($id) > 0;
