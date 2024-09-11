@@ -32,7 +32,7 @@ Se precisar trocar o IP só mudar a variável L5_SWAGGER_CONST_HOST no arquivo .
 ```bash
 docker compose exec app php artisan l5-swagger:generate
 ```
-e tentar acessar novamente
+e tentar acessar novamente ou, se preferir, o json do swagger está disponível em storage/api-docs/api-docs.json
 
 ### Run Tests
 ```bash
