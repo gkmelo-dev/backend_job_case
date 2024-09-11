@@ -3,38 +3,39 @@
 namespace App\Infrastructure\Repositories;
 
 use App\Domain\Repositories\ProjectRepositoryInterface;
-use App\Models\Project;
+use App\Models\Project as EloquentProject;
+use Illuminate\Database\Eloquent\Collection;
 
 class EloquentProjectRepository implements ProjectRepositoryInterface
 {
-    public function findAll()
+    public function findAll(): Collection
     {
-        return Project::all();
+        return EloquentProject::all();
     }
 
-    public function findById($id)
+    public function findById($id): ?EloquentProject
     {
-        return Project::find($id);
+        return EloquentProject::find($id);
     }
 
-    public function create(array $data)
+    public function create(array $data): EloquentProject
     {
-        return Project::create([
+        return EloquentProject::create([
             'client_id' => $data['client_id'],
             'installation_location' => $data['installation_location'],
             'installation_type' => $data['installation_type'],
-            'equipments' => json_encode($data['equipments']) // Serializa os equipamentos para JSON
+            'equipments' => $data['equipments'] // O Laravel faz o cast para JSON
         ]);
     }
 
-    public function update($project)
+    public function update(EloquentProject $project): EloquentProject
     {
         $project->save();
         return $project;
     }
 
-    public function delete($id)
+    public function delete($id): bool
     {
-        return Project::destroy($id);
+        return EloquentProject::destroy($id) > 0;
     }
 }

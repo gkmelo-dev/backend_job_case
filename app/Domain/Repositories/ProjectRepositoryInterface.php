@@ -2,14 +2,17 @@
 
 namespace App\Domain\Repositories;
 
-use App\Domain\Entities\Project;
+use App\Models\Project;
 
 interface ProjectRepositoryInterface
 {
-    public function create(Project $project): Project;
-    public function update(Project $project): Project;
-    public function findById($id): ?Project;
-    public function findAll(): array; // Add findAll method to return all clients
+    public function findAll(): \Illuminate\Database\Eloquent\Collection;
 
-    public function delete($id): void;
+    public function findById($id): ?Project;
+
+    public function create(array $data): Project;
+
+    public function update(Project $project): Project;
+
+    public function delete($id): bool;
 }
