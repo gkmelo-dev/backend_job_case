@@ -55,8 +55,11 @@ class ProjectController extends Controller
             'installation_location' => ['required', 'in:' . implode(',', Utils::getValidUFs())],
             'installation_type' => ['required', 'in:' . implode(',', Utils::getValidInstallationTypes())],
             'equipments' => ['required', 'array'],
-            'equipments.*' => ['in:' . implode(',', Utils::getValidEquipments())], // Valida cada equipamento
+            'equipments.*.name' => ['required', 'in:' . implode(',', Utils::getValidEquipments())],
+            'equipments.*.quantity' => ['required', 'integer', 'min:1'],
         ]);
+
+        $data['equipments'] = json_encode($data['equipments']);
 
         $project = $this->createProjectUseCase->execute($data);
 
@@ -154,7 +157,8 @@ class ProjectController extends Controller
             'installation_location' => ['required', 'in:' . implode(',', Utils::getValidUFs())],
             'installation_type' => ['required', 'in:' . implode(',', Utils::getValidInstallationTypes())],
             'equipments' => ['required', 'array'],
-            'equipments.*' => ['in:' . implode(',', Utils::getValidEquipments())], // Valida cada equipamento
+            'equipments.*.name' => ['required', 'in:' . implode(',', Utils::getValidEquipments())],
+            'equipments.*.quantity' => ['required', 'integer', 'min:1'],
         ]);
 
         $project = $this->projectRepository->findById($id);
@@ -162,6 +166,7 @@ class ProjectController extends Controller
             return response()->json(['message' => 'Project not found'], 404);
         }
 
+        $data['equipments'] = json_encode($data['equipments']);
         $updatedProject = $this->projectRepository->update($project);
 
         return response()->json([
