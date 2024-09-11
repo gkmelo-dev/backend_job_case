@@ -230,9 +230,9 @@ class ProjectController extends Controller
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Project deleted",
+     *         description="Project deleted successfully!",
      *         @OA\JsonContent(
-     *             @OA\Property(property="message", type="string", example="Project deleted")
+     *             @OA\Property(property="message", type="string", example="Project deleted successfully!")
      *         )
      *     ),
      *     @OA\Response(response=404, description="Project not found")
@@ -247,6 +247,6 @@ class ProjectController extends Controller
 
         $this->projectRepository->delete($id);
 
-        return response()->json(['message' => 'Project deleted'], 200);
+        return response()->json(['message' => 'Project deleted successfully!'], 200);
     }
 }

@@ -31,6 +31,7 @@ docker compose exec app php artisan make:test CreateClientUseCaseTest --unit
 docker compose exec app php artisan make:test ClientRoutesTest
 docker compose exec app php artisan make:factory ClientFactory --model=Client
 docker compose exec app php artisan make:test UtilsRoutesTest
+docker compose exec app php artisan make:factory ProjectFactory --model=Project
 
 # RUN TESTS
 docker compose exec app php artisan test
