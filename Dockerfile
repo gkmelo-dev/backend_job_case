@@ -1,31 +1,49 @@
-# Use the official PHP 8.0 image
-FROM php:8.3.11
+FROM php:8.3-fpm
 
-# Install system dependencies and required libraries
-RUN apt-get update -y && apt-get install -y \
-    openssl \
-    zip \
-    unzip \
+# set your user name, ex: user=carlos
+ARG user=yourusername
+ARG uid=1000
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
     git \
-    libonig-dev # Install oniguruma library for mbstring
+    curl \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    zip \
+    unzip
+
+# Clear cache
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
-RUN docker-php-ext-install pdo mbstring
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd sockets
 
-# Install Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+# Get latest Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Set the working directory
-WORKDIR /app
+# Create system user to run Composer and Artisan Commands
+RUN useradd -G www-data,root -u $uid -d /home/$user $user
+RUN mkdir -p /home/$user/.composer && \
+    chown -R $user:$user /home/$user
+
+# Install redis
+RUN pecl install -o -f redis \
+    &&  rm -rf /tmp/pear \
+    &&  docker-php-ext-enable redis
+
+# Set working directory
+WORKDIR /var/www
+
+# Copy custom configurations PHP
+COPY docker/php/custom.ini /usr/local/etc/php/conf.d/custom.ini
 
 # Copy the project files into the container
-COPY . /app
+COPY . /var/www
 
-# Install project dependencies using Composer
+# Run composer install
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
-# Run Laravel's built-in server
-CMD php artisan serve --host=0.0.0.0 --port=8181
-
-# Expose port 8181
-EXPOSE 8181
+# Set the user for the container
+USER $user
