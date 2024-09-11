@@ -7,7 +7,8 @@ cp .env.example .env
 
 # docker compose exec app composer install
 # docker compose exec app artisan key:generate
-# php artisan key:generate
+# docker compose exec app php artisan route:clear
+docker compose exec app php artisan route:list
 # php artisan migrate
 
 # update .env
