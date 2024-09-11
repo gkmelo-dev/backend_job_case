@@ -34,7 +34,12 @@ class ProjectController extends Controller
      *             @OA\Property(property="client_id", type="integer", example=1),
      *             @OA\Property(property="installation_location", type="string", example="SP"),
      *             @OA\Property(property="installation_type", type="string", example="Laje"),
-     *             @OA\Property(property="equipments", type="array", @OA\Items(type="string"), example={"Módulo", "Inversor"}),
+     *             @OA\Property(property="equipments", type="array", 
+     *                 @OA\Items(
+     *                     @OA\Property(property="name", type="string", example="Módulo"),
+     *                     @OA\Property(property="quantity", type="integer", example=10)
+     *                 )
+     *             )
      *         )
      *     ),
      *     @OA\Response(
@@ -59,8 +64,6 @@ class ProjectController extends Controller
             'equipments.*.quantity' => ['required', 'integer', 'min:1'],
         ]);
 
-        $data['equipments'] = json_encode($data['equipments']);
-
         $project = $this->createProjectUseCase->execute($data);
 
         return response()->json([
@@ -78,7 +81,19 @@ class ProjectController extends Controller
      *         response=200,
      *         description="List of projects",
      *         @OA\JsonContent(
-     *             @OA\Property(property="projects", type="array", @OA\Items(type="object"))
+     *             @OA\Property(property="projects", type="array", 
+     *                 @OA\Items(type="object",
+     *                     @OA\Property(property="client_id", type="integer", example=1),
+     *                     @OA\Property(property="installation_location", type="string", example="SP"),
+     *                     @OA\Property(property="installation_type", type="string", example="Laje"),
+     *                     @OA\Property(property="equipments", type="array", 
+     *                         @OA\Items(
+     *                             @OA\Property(property="name", type="string", example="Módulo"),
+     *                             @OA\Property(property="quantity", type="integer", example=10)
+     *                         )
+     *                     )
+     *                 )
+     *             )
      *         )
      *     )
      * )
@@ -137,7 +152,12 @@ class ProjectController extends Controller
      *         @OA\JsonContent(
      *             @OA\Property(property="installation_location", type="string", example="SP"),
      *             @OA\Property(property="installation_type", type="string", example="Laje"),
-     *             @OA\Property(property="equipments", type="array", @OA\Items(type="string"), example={"Módulo", "Inversor"})
+     *             @OA\Property(property="equipments", type="array", 
+     *                 @OA\Items(
+     *                     @OA\Property(property="name", type="string", example="Módulo"),
+     *                     @OA\Property(property="quantity", type="integer", example=10)
+     *                 )
+     *             )
      *         )
      *     ),
      *     @OA\Response(
@@ -166,7 +186,6 @@ class ProjectController extends Controller
             return response()->json(['message' => 'Project not found'], 404);
         }
 
-        $data['equipments'] = json_encode($data['equipments']);
         $updatedProject = $this->projectRepository->update($project);
 
         return response()->json([

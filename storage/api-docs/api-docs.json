@@ -319,6 +319,36 @@
                                         "projects": {
                                             "type": "array",
                                             "items": {
+                                                "properties": {
+                                                    "client_id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "installation_location": {
+                                                        "type": "string",
+                                                        "example": "SP"
+                                                    },
+                                                    "installation_type": {
+                                                        "type": "string",
+                                                        "example": "Laje"
+                                                    },
+                                                    "equipments": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "example": "Módulo"
+                                                                },
+                                                                "quantity": {
+                                                                    "type": "integer",
+                                                                    "example": 10
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    }
+                                                },
                                                 "type": "object"
                                             }
                                         }
@@ -357,12 +387,18 @@
                                     "equipments": {
                                         "type": "array",
                                         "items": {
-                                            "type": "string"
-                                        },
-                                        "example": [
-                                            "Módulo",
-                                            "Inversor"
-                                        ]
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Módulo"
+                                                },
+                                                "quantity": {
+                                                    "type": "integer",
+                                                    "example": 10
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
                                     }
                                 },
                                 "type": "object"
@@ -462,12 +498,18 @@
                                     "equipments": {
                                         "type": "array",
                                         "items": {
-                                            "type": "string"
-                                        },
-                                        "example": [
-                                            "Módulo",
-                                            "Inversor"
-                                        ]
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Módulo"
+                                                },
+                                                "quantity": {
+                                                    "type": "integer",
+                                                    "example": 10
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
                                     }
                                 },
                                 "type": "object"

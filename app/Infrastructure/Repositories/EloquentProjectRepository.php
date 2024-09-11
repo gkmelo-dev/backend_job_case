@@ -14,7 +14,8 @@ class EloquentProjectRepository implements ProjectRepositoryInterface
         $eloquentProject->client_id = $project->clientId;
         $eloquentProject->installation_location = $project->location;
         $eloquentProject->installation_type = $project->installationType;
-        $eloquentProject->equipments = $project->equipments;
+        // Serializa os equipamentos para salvar no banco de dados
+        $eloquentProject->equipments = json_encode($project->equipments);
         $eloquentProject->save();
 
         $project->id = $eloquentProject->id;
@@ -32,7 +33,8 @@ class EloquentProjectRepository implements ProjectRepositoryInterface
         $eloquentProject->client_id = $project->clientId;
         $eloquentProject->installation_location = $project->location;
         $eloquentProject->installation_type = $project->installationType;
-        $eloquentProject->equipments = $project->equipments;
+        // Serializa os equipamentos para salvar no banco de dados
+        $eloquentProject->equipments = json_encode($project->equipments);
         $eloquentProject->save();
 
         return $project;
@@ -46,12 +48,15 @@ class EloquentProjectRepository implements ProjectRepositoryInterface
             return null;
         }
 
+        // Decodifica os equipamentos do JSON para um array
+        $equipments = json_decode($eloquentProject->equipments, true);
+
         return new Project(
             $eloquentProject->id,
             $eloquentProject->client_id,
             $eloquentProject->installation_location,
             $eloquentProject->installation_type,
-            $eloquentProject->equipments
+            $equipments
         );
     }
 
@@ -60,18 +65,18 @@ class EloquentProjectRepository implements ProjectRepositoryInterface
         $eloquentProjects = EloquentProject::all();
     
         return $eloquentProjects->map(function ($project) {
+            // Decodifica os equipamentos do JSON para um array
+            $equipments = json_decode($project->equipments, true);
+
             return new Project(
                 $project->id,
                 $project->client_id,
                 $project->installation_location,
                 $project->installation_type,
-                $project->equipments
+                $equipments
             );
         })->toArray();
     }
-
-
-
 
     public function delete($id): bool
     {
