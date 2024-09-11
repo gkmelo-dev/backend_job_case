@@ -16,7 +16,13 @@ class CreateProjectUseCase
 
     public function execute(array $data): Project
     {
-        $project = new Project(null, $data['clientId'], $data['location'], $data['installationType'], []);
+        $project = new Project(
+            null,
+            $data['client_id'],
+            $data['installation_location'],
+            $data['installation_type'],
+            $data['equipments']
+        );
         return $this->projectRepository->create($project);
     }
 }
