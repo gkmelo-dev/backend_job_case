@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
 // use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\UtilityController;
 
 Route::get('/', function () {
     return response()->json(['ok' => 'true']);
@@ -11,6 +12,10 @@ Route::get('/', function () {
 Route::get('/test-exception', function () {
     throw new \Exception('Test exception');
 });
+
+// Rotas para UFs e Equipamentos válidos
+Route::get('/valid-ufs', [UtilityController::class, 'listValidUFs']);
+Route::get('/valid-equipments', [UtilityController::class, 'listValidEquipments']);
 
 Route::prefix('clients')->group(function () {
     Route::post('/', [ClientController::class, 'store']); // Create a new client

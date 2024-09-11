@@ -301,12 +301,76 @@
                     }
                 }
             }
+        },
+        "/api/valid-ufs": {
+            "get": {
+                "tags": [
+                    "Utilities"
+                ],
+                "summary": "List all valid UFs",
+                "operationId": "34aa08ef8b71404952b34760258b5478",
+                "responses": {
+                    "200": {
+                        "description": "List of valid UFs",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "ufs": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "example": "SP"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/valid-equipments": {
+            "get": {
+                "tags": [
+                    "Utilities"
+                ],
+                "summary": "List all valid equipment categories",
+                "operationId": "86c74e5c8181fd577dc7422780b73190",
+                "responses": {
+                    "200": {
+                        "description": "List of valid equipment categories",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "equipments": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "example": "Módulo"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "tags": [
         {
             "name": "Clients",
             "description": "Clients"
+        },
+        {
+            "name": "Utilities",
+            "description": "Utilities"
         }
     ]
 }
