@@ -8,14 +8,14 @@ class Project
     public $clientId;
     public $location;
     public $installationType;
-    public $equipment;
+    public $equipments;
 
-    public function __construct($id, $clientId, $location, $installationType, $equipment)
+    public function __construct($id, $clientId, $location, $installationType, array $equipments = [])
     {
         $this->id = $id;
         $this->clientId = $clientId;
         $this->location = $location;
         $this->installationType = $installationType;
-        $this->equipment = $equipment;
+        $this->equipments = $equipments;
     }
 }

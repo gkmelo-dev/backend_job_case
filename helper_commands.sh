@@ -5,21 +5,33 @@ mv 77sol_backend_case/.* ./
 mv 77sol_backend_case/* ./
 cp .env.example .env
 
-# docker compose exec app composer install
-# docker compose exec app artisan key:generate
-# docker compose exec app php artisan route:clear
-# docker compose exec app php artisan route:list
-# docker compose exec app php artisan make:migration create_clients_table
-# docker compose exec app php artisan migrate
+# Random commands
+docker compose exec app composer install
+docker compose exec app artisan key:generate
+docker compose exec app php artisan route:clear
+docker compose exec app php artisan route:list
+docker compose exec app php artisan migrate
 
+# SETUP SWAGGER
 docker compose exec app composer require darkaonline/l5-swagger
 docker compose exec app php artisan vendor:publish --provider "L5Swagger\L5SwaggerServiceProvider"
 
-# TESTS
+# GENERATE SWAGGER
+docker compose exec app php artisan l5-swagger:generate
+
+# CREATE TABLES
+docker compose exec app php artisan make:migration create_clients_table
+docker compose exec app php artisan make:migration create_projects_table
+# docker compose exec app php artisan make:migration create_equipments_table
+
+docker compose exec app php artisan migrate
+
+# CREATE TESTS
 docker compose exec app php artisan make:test CreateClientUseCaseTest --unit
 docker compose exec app php artisan make:test ClientRoutesTest
 docker compose exec app php artisan make:factory ClientFactory --model=Client
 
+# RUN TESTS
 docker compose exec app php artisan test
 
 # Create custom validator
@@ -32,8 +44,6 @@ docker compose exec app php artisan route:clear
 
 docker compose exec app composer dump-autoload
 
-# Generate Swagger
-docker compose exec app php artisan l5-swagger:generate
 
 # update .env
 # APP_NAME="77sol backend"
