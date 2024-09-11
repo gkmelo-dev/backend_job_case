@@ -48,4 +48,25 @@ class UtilityController extends Controller
         $equipments = Utils::getValidEquipments();
         return response()->json(['equipments' => $equipments], 200);
     }
+
+    /**
+     * @OA\Get(
+     *     path="/api/valid-installation-types",
+     *     summary="List all valid installation types",
+     *     tags={"Utilities"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="List of valid installation types",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="installation_types", type="array", @OA\Items(type="string", example="Fibrocimento (Madeira)"))
+     *         )
+     *     )
+     * )
+     */
+    public function listValidInstallationTypes()
+    {
+        $installationTypes = Utils::getValidInstallationTypes();
+        return response()->json(['installation_types' => $installationTypes], 200);
+    }
 }

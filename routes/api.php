@@ -16,6 +16,7 @@ Route::get('/test-exception', function () {
 // Rotas para UFs e Equipamentos válidos
 Route::get('/valid-ufs', [UtilityController::class, 'listValidUFs']);
 Route::get('/valid-equipments', [UtilityController::class, 'listValidEquipments']);
+Route::get('/valid-installation-types', [UtilityController::class, 'listValidInstallationTypes']);
 
 Route::prefix('clients')->group(function () {
     Route::post('/', [ClientController::class, 'store']); // Create a new client

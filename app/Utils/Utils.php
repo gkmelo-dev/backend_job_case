@@ -7,8 +7,8 @@ class Utils
     public static function getValidUFs(): array
     {
         return [
-            'AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 
-            'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 
+            'AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS',
+            'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC',
             'SP', 'SE', 'TO',
         ];
     }
@@ -25,6 +25,18 @@ class Utils
             'String Box',
             'Cabo Tronco',
             'Endcap'
+        ];
+    }
+
+    public static function getValidInstallationTypes(): array
+    {
+        return [
+            'Fibrocimento (Madeira)',
+            'Fibrocimento (Metálico)',
+            'Cerâmico',
+            'Metálico',
+            'Laje',
+            'Solo'
         ];
     }
 }

@@ -361,6 +361,36 @@
                     }
                 }
             }
+        },
+        "/api/valid-installation-types": {
+            "get": {
+                "tags": [
+                    "Utilities"
+                ],
+                "summary": "List all valid installation types",
+                "operationId": "dec12eaf17e8ef30f28f19aa9febc596",
+                "responses": {
+                    "200": {
+                        "description": "List of valid installation types",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "installation_types": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "example": "Fibrocimento (Madeira)"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "tags": [

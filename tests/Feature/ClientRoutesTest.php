@@ -80,10 +80,12 @@ class ClientRoutesTest extends TestCase
         ]);
 
         $response->assertStatus(200)
-                 ->assertJson([
-                     'name' => 'Jane Doe',
-                     'email' => 'jane@example.com'
-                 ]);
+            ->assertJson([
+                'data' => [
+                    'name' => 'Jane Doe',
+                    'email' => 'jane@example.com',
+                ]
+            ]);
 
         $this->assertDatabaseHas('clients', ['email' => 'jane@example.com']);
     }
@@ -95,7 +97,7 @@ class ClientRoutesTest extends TestCase
         $response = $this->deleteJson("/api/clients/{$client->id}");
 
         $response->assertStatus(200)
-                 ->assertJson(['message' => 'Client deleted']);
+                 ->assertJson(['message' => 'Client deleted successfully!']);
 
         $this->assertDatabaseMissing('clients', ['id' => $client->id]);
     }
