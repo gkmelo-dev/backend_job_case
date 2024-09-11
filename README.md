@@ -38,9 +38,9 @@ docker compose exec app php artisan test
 ```
 
 ## Alguns Links de Referência
-https://github.com/namtrt/laravel-10-clean-architecture
-https://github.com/especializati/setup-docker-laravel
-https://dev.to/bdelespierre/how-to-implement-clean-architecture-with-laravel-2f2i
+https://github.com/namtrt/laravel-10-clean-architecture<br>
+https://github.com/especializati/setup-docker-laravel<br>
+https://dev.to/bdelespierre/how-to-implement-clean-architecture-with-laravel-2f2i<br>
 
 ## Observações
 Sei que não é ideal ter o .env no diretório do projeto, mas pensando no avaliador, achei melhor deixar assim para facilitar a execução do projeto.
