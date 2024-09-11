@@ -13,7 +13,7 @@ class UtilsRoutesTest extends TestCase
      *
      * @return void
      */
-    public function testListValidUFs()
+    public function testListValidUfs()
     {
         $response = $this->get('/api/valid-ufs');
     
