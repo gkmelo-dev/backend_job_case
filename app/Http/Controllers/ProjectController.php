@@ -98,13 +98,6 @@ class ProjectController extends Controller
      *         required=false,
      *         @OA\Schema(type="string")
      *     ),
-     *     @OA\Parameter(
-     *         name="equipments",
-     *         in="query",
-     *         description="Filter by equipment",
-     *         required=false,
-     *         @OA\Schema(type="string")
-     *     ),
      *     @OA\Response(
      *         response=200,
      *         description="List of projects",

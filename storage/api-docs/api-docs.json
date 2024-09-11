@@ -307,8 +307,37 @@
                 "tags": [
                     "Projects"
                 ],
-                "summary": "List all projects",
+                "summary": "List all projects with optional filters",
                 "operationId": "8d4a13ef3fc773ff4031e515460919ea",
+                "parameters": [
+                    {
+                        "name": "client_id",
+                        "in": "query",
+                        "description": "Filter by client ID",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "installation_location",
+                        "in": "query",
+                        "description": "Filter by installation location (UF)",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "installation_type",
+                        "in": "query",
+                        "description": "Filter by installation type",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "List of projects",
@@ -319,36 +348,6 @@
                                         "projects": {
                                             "type": "array",
                                             "items": {
-                                                "properties": {
-                                                    "client_id": {
-                                                        "type": "integer",
-                                                        "example": 1
-                                                    },
-                                                    "installation_location": {
-                                                        "type": "string",
-                                                        "example": "SP"
-                                                    },
-                                                    "installation_type": {
-                                                        "type": "string",
-                                                        "example": "Laje"
-                                                    },
-                                                    "equipments": {
-                                                        "type": "array",
-                                                        "items": {
-                                                            "properties": {
-                                                                "name": {
-                                                                    "type": "string",
-                                                                    "example": "Módulo"
-                                                                },
-                                                                "quantity": {
-                                                                    "type": "integer",
-                                                                    "example": 10
-                                                                }
-                                                            },
-                                                            "type": "object"
-                                                        }
-                                                    }
-                                                },
                                                 "type": "object"
                                             }
                                         }
