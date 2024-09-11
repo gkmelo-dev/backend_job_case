@@ -19,11 +19,27 @@ class ClientRoutesTest extends TestCase
             'cpfCnpj' => '12345678909'
         ]);
 
+        // ex output
+        // {
+        //     "message": "Client created successfully!",
+        //     "data": {
+        //         "id": 7,
+        //         "name": "John Doe",
+        //         "email": "john@example.com",
+        //         "phone": "1234567890",
+        //         "cpfCnpj": "12345678909"
+        //     }
+        // }
         $response->assertStatus(201)
-                 ->assertJson([
-                     'name' => 'John Doe',
-                     'email' => 'john@example.com'
-                 ]);
+                    ->assertJson([
+                        'message' => 'Client created successfully!',
+                        'data' => [
+                            'name' => 'John Doe',
+                            'email' => 'john@example.com',
+                            'phone' => '1234567890',
+                            'cpfCnpj' => '12345678909'
+                        ]
+                    ]);
 
         $this->assertDatabaseHas('clients', ['email' => 'john@example.com']);
     }

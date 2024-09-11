@@ -29,7 +29,10 @@ class ClientController extends Controller
 
         $client = $this->createClientUseCase->execute($data);
 
-        return response()->json($client, 201);
+        return response()->json([
+            'message' => 'Client created successfully!',
+            'data' => $client
+        ], 201);
     }
 
     public function index()

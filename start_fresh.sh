@@ -23,6 +23,12 @@ docker compose exec app php artisan test
 # Create custom validator
 docker compose exec app php artisan make:rule CpfOrCnpj
 
+# CLEAR cache
+docker compose exec app php artisan config:clear
+docker compose exec app php artisan cache:clear
+docker compose exec app php artisan route:clear
+
+docker compose exec app composer dump-autoload
 
 # update .env
 # APP_NAME="77sol backend"

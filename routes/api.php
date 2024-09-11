@@ -8,6 +8,10 @@ Route::get('/', function () {
     return response()->json(['ok' => 'true']);
 });
 
+Route::get('/test-exception', function () {
+    throw new \Exception('Test exception');
+});
+
 Route::prefix('clients')->group(function () {
     Route::post('/', [ClientController::class, 'store']); // Create a new client
     Route::get('/', [ClientController::class, 'index']); // List all clients
