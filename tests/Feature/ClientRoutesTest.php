@@ -34,7 +34,7 @@ class ClientRoutesTest extends TestCase
             'name' => 'John Doe',
             'email' => 'john@example.com',
             'phone' => '1234567890',
-            'cpf_cnpj' => '12345678901'
+            'cpf_cnpj' => '12345678909'
         ]);
 
         $response = $this->getJson('/api/clients');
@@ -53,14 +53,14 @@ class ClientRoutesTest extends TestCase
             'name' => 'John Doe',
             'email' => 'john@example.com',
             'phone' => '1234567890',
-            'cpf_cnpj' => '12345678901'
+            'cpf_cnpj' => '12345678909'
         ]);
 
         $response = $this->putJson("/api/clients/{$client->id}", [
             'name' => 'Jane Doe',
             'email' => 'jane@example.com',
-            'phone' => '9876543210',
-            'cpfCnpj' => '98765432101'
+            'phone' => '1234567890',
+            'cpfCnpj' => '12345678909'
         ]);
 
         $response->assertStatus(200)

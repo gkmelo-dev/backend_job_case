@@ -55,7 +55,7 @@ class ClientController extends Controller
             'name' => 'required',
             'email' => 'required|email',
             'phone' => 'required',
-            'cpfCnpj' => 'required|cpf_or_cnpj'
+            'cpfCnpj' => ['required', new CpfOrCnpj]
         ]);
 
         $client = $this->clientRepository->findById($id);
