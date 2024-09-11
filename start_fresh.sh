@@ -16,6 +16,8 @@ cp .env.example .env
 # TESTS
 docker compose exec app php artisan make:test CreateClientUseCaseTest --unit
 docker compose exec app php artisan make:test ClientRoutesTest
+docker compose exec app php artisan make:factory ClientFactory --model=Client
+
 docker compose exec app php artisan test
 
 # Create custom validator

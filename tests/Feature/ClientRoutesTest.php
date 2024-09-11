@@ -16,7 +16,7 @@ class ClientRoutesTest extends TestCase
             'name' => 'John Doe',
             'email' => 'john@example.com',
             'phone' => '1234567890',
-            'cpfCnpj' => '12345678901'
+            'cpfCnpj' => '12345678909'
         ]);
 
         $response->assertStatus(201)
