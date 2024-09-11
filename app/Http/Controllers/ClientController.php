@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Application\UseCases\CreateClientUseCase;
-// use App\Application\UseCases\UpdateClientUseCase;
+use App\Rules\CpfOrCnpj; // Import the updated rule
 use Illuminate\Http\Request;
 use App\Domain\Repositories\ClientRepositoryInterface;
 
@@ -24,7 +24,7 @@ class ClientController extends Controller
             'name' => 'required',
             'email' => 'required|email',
             'phone' => 'required',
-            'cpfCnpj' => 'required|cpf_or_cnpj'
+            'cpfCnpj' => ['required', new CpfOrCnpj]
         ]);
 
         $client = $this->createClientUseCase->execute($data);
@@ -35,7 +35,7 @@ class ClientController extends Controller
     public function index()
     {
         $clients = $this->clientRepository->findAll();
-        return response()->json($clients, 200);
+        return response()->json(['clients'=> $clients],200);
     }
 
     public function show($id)

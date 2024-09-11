@@ -10,9 +10,17 @@ cp .env.example .env
 # docker compose exec app php artisan route:clear
 # docker compose exec app php artisan route:list
 # docker compose exec app php artisan make:migration create_clients_table
-docker compose exec app php artisan migrate
+# docker compose exec app php artisan migrate
 
-# php artisan migrate
+
+# TESTS
+docker compose exec app php artisan make:test CreateClientUseCaseTest --unit
+docker compose exec app php artisan make:test ClientRoutesTest
+docker compose exec app php artisan test
+
+# Create custom validator
+docker compose exec app php artisan make:rule CpfOrCnpj
+
 
 # update .env
 # APP_NAME="77sol backend"
