@@ -42,9 +42,12 @@ COPY docker/php/custom.ini /usr/local/etc/php/conf.d/custom.ini
 # Copy the project files into the container
 COPY . /var/www
 
-# Run composer install
-RUN composer install --no-interaction --prefer-dist --optimize-autoloader
+RUN mkdir -p /var/www/vendor \
+    && chown -R $user:$user /var/www/vendor
 
-RUN chown -R yourusername:yourusername /var/www/vendor
+# Run composer install
+RUN composer install --no-interaction --prefer-dist --optimize-autoloader \
+    && ls -la /var/www/vendor
+
 # Set the user for the container
 USER $user
