@@ -45,5 +45,6 @@ COPY . /var/www
 # Run composer install
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
+RUN chown -R yourusername:yourusername /var/www/vendor
 # Set the user for the container
 USER $user
